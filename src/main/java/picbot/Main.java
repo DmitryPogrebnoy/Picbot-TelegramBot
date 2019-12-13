@@ -1,3 +1,5 @@
+package picbot;
+
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.ApiContext;
@@ -11,12 +13,12 @@ public class Main {
 
         DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
         /*
-          For run app in Russia without vpn
+          For run app in Russia with proxy
          */
         /*
-        botOptions.setProxyHost("185.29.11.145");
-        botOptions.setProxyPort(4145);
-        botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS4);
+        botOptions.setProxyHost("50.116.38.201");
+        botOptions.setProxyPort(8723);
+        botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS5);
         */
         botOptions.setMaxThreads(4);
 

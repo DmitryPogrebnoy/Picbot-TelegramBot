@@ -1,3 +1,5 @@
+package picbot;
+
 import org.slf4j.Logger;
 import org.slf4j.impl.SimpleLoggerFactory;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
@@ -67,11 +69,6 @@ public final class Picbot extends TelegramLongPollingBot {
     @Override
     public String getBotToken(){
         return System.getenv("BOT_TOKEN");
-    }
-
-    @Override
-    public void onUpdatesReceived(List<Update> updates){
-        onUpdateReceived(Collections.max(updates, Comparator.comparing(Update::getUpdateId)));
     }
 
     @Override
@@ -152,7 +149,7 @@ public final class Picbot extends TelegramLongPollingBot {
                     } catch(TelegramApiException e) {
                         e.printStackTrace();
                     }
-                    sendMessage(receivedMessage.getChatId(), "Привет! Я Picbot. Умею присылать случайные картинки. Нажимай на кнопку ✨magic✨ - отправлю тебе картинку.");
+                    sendMessage(receivedMessage.getChatId(), "Привет! Я умею присылать случайные картинки с Unsplash.com. Нажимай на кнопку ✨magic✨ - отправлю тебе картинку.");
                     break;
                 }
                 case "/stop": {
@@ -187,9 +184,9 @@ public final class Picbot extends TelegramLongPollingBot {
                     SendInvoice sendInvoice = new SendInvoice()
                             .setChatId((receivedMessage.getChatId()).intValue())
                             .setTitle("Сказать спасибо автору бота\uD83D\uDCB0")
-                            .setDescription("Твой username попадет в список спонсоров /donateList")
+                            .setDescription("Твой username попадет в список спонсоров /donatelist")
                             .setPayload("donate")
-                            .setProviderToken(System.getenv("YANDEX_CASH_PROVIDER_TOKEN"))
+                            .setProviderToken(System.getenv("PAYMENT_PROVIDER_TOKEN"))
                             .setStartParameter("start_parameter")
                             .setCurrency("RUB");
                     LabeledPrice labelPriceSimpleThanks = new LabeledPrice();
@@ -206,7 +203,7 @@ public final class Picbot extends TelegramLongPollingBot {
                     }
                     break;
                 }
-                case "/donateList": {
+                case "/donatelist": {
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append("Спонсоры проекта\uD83D\uDCB8\n");
                     synchronized(this) {
@@ -218,7 +215,7 @@ public final class Picbot extends TelegramLongPollingBot {
                     sendMessage(receivedMessage.getChatId(), stringBuilder.toString());
                     break;
                 }
-                case "/getPic":
+                case "/getpic":
                 case "✨magic✨": {
                     SendPhoto sendPhotoRequest = new SendPhoto();
                     sendPhotoRequest.setChatId(update.getMessage().getChatId());
