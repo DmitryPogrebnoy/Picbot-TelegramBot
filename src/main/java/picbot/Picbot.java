@@ -153,18 +153,10 @@ public final class Picbot extends TelegramLongPollingBot {
                     sendMessage(receivedMessage.getChatId(), "Привет! Я умею присылать случайные картинки с Unsplash.com. Нажимай на кнопку ✨magic✨ - отправлю тебе картинку.");
                     break;
                 }
-                case "/stop": {
-                    LeaveChat leaveChat = new LeaveChat().setChatId(receivedMessage.getChatId());
-                    try {
-                        execute(leaveChat);
-                    } catch(TelegramApiException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                }
                 case "/help": {
                     sendMessage(receivedMessage.getChatId(),
-                            "Все очень просто! Нажми на кнопку ✨magic✨ и я пришлю тебе случайную картинку.");
+                            "Все очень просто! Нажми на кнопку ✨magic✨ и я пришлю тебе случайную картинку.\n" +
+                                    "Доступные команды:\n /getpic\n /info\n /donate\n /donatelist");
                     break;
                 }
                 case "/info": {
