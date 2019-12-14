@@ -36,6 +36,7 @@ public final class Picbot extends TelegramLongPollingBot {
     private final LocalDateTime dateTimeWork = LocalDateTime.now();
     private final AtomicLong numberOfSendPictures = new AtomicLong(0);
     private final AtomicLong numberOfLikedPictures = new AtomicLong(0);
+    private final Random random = new Random();
     private final HashMap<String, Integer> donateHashMap = new HashMap<>();
 
     Picbot(DefaultBotOptions botOptions) {
@@ -219,7 +220,7 @@ public final class Picbot extends TelegramLongPollingBot {
                 case "✨magic✨": {
                     SendPhoto sendPhotoRequest = new SendPhoto();
                     sendPhotoRequest.setChatId(update.getMessage().getChatId());
-                    sendPhotoRequest.setPhoto("https://source.unsplash.com/random?sig=" + Math.random());
+                    sendPhotoRequest.setPhoto("https://source.unsplash.com/random?sig=" + random.nextLong());
 
                     InlineKeyboardMarkup keyboardInline = new InlineKeyboardMarkup();
                     List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
